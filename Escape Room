@@ -1,0 +1,62 @@
+//
+//  main.swift
+//  DjgEscapeRoomGame
+//
+//  Created by Dominique Escoe on 11/12/24.
+//
+
+import Foundation
+
+func prompt(_ message: String) -> String {
+    print(message, terminator: " ")
+    return readLine() ?? ""
+}
+
+func startEscapeRoom() {
+    print("""
+    Welcome to the CLI Escape Room!
+    You find yourself in a locked room with three puzzles to solve.
+    Solve all of them to escape. Good luck!
+    """)
+
+    // Puzzle 1: Math Problem
+    print("\nPuzzle 1: Solve this math problem.")
+    let answer1 = prompt("What is 15 + 27?")
+    if answer1 == "42" {
+        print("Correct! Moving to the next puzzle.")
+    } else {
+        print("Wrong answer. The door remains locked.")
+        return
+    }
+
+    // Puzzle 2: Riddle
+    print("\nPuzzle 2: Solve this riddle.")
+    print("""
+    I speak without a mouth and hear without ears.
+    I have no body, but I come alive with the wind.
+    What am I?
+    """)
+    let answer2 = prompt("Enter your answer:")
+    if answer2.lowercased() == "echo" {
+        print("Correct! Moving to the final puzzle.")
+    } else {
+        print("Wrong answer. The door remains locked.")
+        return
+    }
+
+    // Puzzle 3: Code Sequence
+    print("\nPuzzle 3: Crack the code sequence.")
+    print("""
+    You find a keypad with numbers. To unlock the final door, enter the correct 3-digit sequence.
+    Clue: The sequence is the reverse of '321'.
+    """)
+    let answer3 = prompt("Enter the 3-digit code:")
+    if answer3 == "123" {
+        print("\nCongratulations! You've cracked the code and escaped the room!")
+    } else {
+        print("Wrong code. The door remains locked.")
+    }
+}
+
+startEscapeRoom()
+
