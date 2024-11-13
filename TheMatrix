@@ -1,0 +1,124 @@
+//
+//  main.swift
+//  DjgTheMatrix
+//
+//  Created by Dominique Escoe on 11/12/24.
+//
+
+import Foundation
+
+// ANSI color codes for green text
+let greenText = "\u{001B}[0;32m"
+let resetText = "\u{001B}[0m"
+
+// Function to print a message in "Matrix style"
+func printMatrixStyle(_ message: String) {
+    for char in message {
+        print("\(greenText)\(char)\(resetText)", terminator: "")
+        fflush(stdout)
+        usleep(50000) // Adjust the speed of character printing if needed
+    }
+    print()
+}
+
+// Function to handle user input with a prompt
+func prompt(_ message: String) -> String {
+    printMatrixStyle(message)
+    guard let input = readLine(strippingNewline: true) else {
+        return ""
+    }
+    return input.trimmingCharacters(in: .whitespacesAndNewlines)
+}
+
+// Function to print random 0s and 1s
+func printMatrixCodeLines(lines: Int, length: Int) {
+    for _ in 0..<lines {
+        var line = ""
+        for _ in 0..<length {
+            line += Bool.random() ? "0" : "1"
+        }
+        print("\(greenText)\(line)\(resetText)")
+        usleep(100000) // Adjust speed for aesthetic
+    }
+}
+
+// Print "MATRIX" in a tech-style
+func printMatrixHeader() {
+    let matrixArt = """
+    ███    ███  █████  ████████ ███████   ██ ██     ██
+    ████  ████ ██   ██    ██    ██   ██   ██   ██ ██
+    ██ ████ ██ ███████    ██    ███████   ██    ██ 
+    ██  ██  ██ ██   ██    ██    ██    ██  ██  ██  ██
+    ██      ██ ██   ██    ██    ██     ██ ██ ██     ██
+    """
+    print("\(greenText)\(matrixArt)\(resetText)")
+}
+
+// Main game function with aesthetic enhancements
+func matrixEscapeRoom() {
+    printMatrixHeader()
+    printMatrixStyle("Welcome to the Matrix Construct.\n")
+    printMatrixCodeLines(lines: 3, length: 40) // Display lines of 0s and 1s
+
+    printMatrixStyle("""
+    You are trapped inside a digital maze controlled by an advanced AI.
+    Solve the puzzles to navigate through the layers and escape.
+    Good luck, Neo.
+    """)
+
+    // Puzzle 1: The Binary Code Cipher
+    printMatrixStyle("\nPuzzle 1: Decode this binary sequence to unlock the terminal.")
+    printMatrixStyle("01001000 01101001 (Hint: ASCII characters)")
+    let answer1 = prompt("Enter the decoded message: ")
+    if answer1.lowercased() == "hi" {
+        printMatrixStyle("Correct! Access granted to the next level.")
+    } else {
+        printMatrixStyle("Access denied. The sentinels are closing in...")
+        return
+    }
+
+    // Puzzle 2: Logical Pathways
+    printMatrixStyle("\nPuzzle 2: Solve the logic gate to proceed.")
+    printMatrixStyle("What is the result of (1 AND 0 OR 1)?")
+    let answer2 = prompt("Enter 0 or 1: ")
+    if answer2 == "1" {
+        printMatrixStyle("Correct! You found the correct path.")
+    } else {
+        printMatrixStyle("Incorrect. The sentinels detected you...")
+        return
+    }
+
+    // Puzzle 3: The Keymaker's Code
+    printMatrixStyle("\nPuzzle 3: Combine the code snippets to find the passphrase.")
+    printMatrixStyle("""
+    Snippet 1: "Follow"
+    Snippet 2: " the white"
+    Snippet 3: " rabbit"
+    """)
+    let answer3 = prompt("Enter the passphrase: ")
+    if answer3.lowercased() == "follow the white rabbit" {
+        printMatrixStyle("The passphrase is correct. The final door appears.")
+    } else {
+        printMatrixStyle("Wrong passphrase. The code collapses around you...")
+        return
+    }
+
+    // Final Puzzle: The Oracle's Question
+    printMatrixStyle("\nFinal Puzzle: Answer the Oracle's question.")
+    printMatrixStyle("What is real? How do you define reality?")
+    let answer4 = prompt("Enter your answer: ")
+    if answer4.lowercased().contains("perception") || answer4.lowercased().contains("perceived") {
+        printMatrixStyle("""
+        Congratulations! You have solved all the puzzles and escaped the construct.
+        The Matrix shatters, and you are free.
+
+        █▓▒░ SYSTEM EXIT SUCCESSFUL ░▒▓█
+        """)
+    } else {
+        printMatrixStyle("Your perception was not enough. The simulation restarts...")
+    }
+}
+
+
+// Run the game
+matrixEscapeRoom()
