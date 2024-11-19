@@ -158,7 +158,7 @@ func matrixEscapeRoom() {
         █▓▒░ SYSTEM EXIT SUCCESSFUL ░▒▓█
         """)
     } else {
-        printMatrixStyle("Your perception was not enough. The simulation restarts...")
+        printMatrixStyle("You're locked in the Android matrix Forever. The code collapses...")
     }
 }
 
