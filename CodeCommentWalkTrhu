@@ -1,0 +1,130 @@
+swift
+//
+//  main.swift
+//  DjgTheMatrix
+//
+//  Created by Dominique Escoe on 11/12/24.
+//
+
+import Foundation // Importing Foundation framework for basic functionalities
+
+// ANSI color codes for green text
+let greenText = "\u{001B}[0;32m" // Code for green-colored text output
+let resetText = "\u{001B}[0m"    // Code to reset text color to default
+
+// Function to print a message in "Matrix style"
+// This function takes a string message as input and prints it character by character with a green text color
+func printMatrixStyle(_ message: String) {
+    for char in message { // Loop over each character in the string
+        print("\(greenText)\(char)\(resetText)", terminator: "") // Print character with green color
+        fflush(stdout) // Flush the standard output buffer to ensure immediate display
+        usleep(50000) // Delay for 50 milliseconds (adjustable for print speed effect)
+    }
+    print() // Move to a new line after printing the message
+}
+
+// Function to handle user input with a prompt
+// Displays a message to the user and captures their input
+func prompt(_ message: String) -> String {
+    printMatrixStyle(message) // Print the prompt message in Matrix style
+    guard let input = readLine(strippingNewline: true) else { // Capture user input
+        return "" // Return empty string if input is nil
+    }
+    return input.trimmingCharacters(in: .whitespacesAndNewlines) // Trim whitespace and newline characters
+}
+
+// Function to print random lines of binary code (0s and 1s)
+// Used for visual aesthetics in the game
+func printMatrixCodeLines(lines: Int, length: Int) {
+    for _ in 0..<lines { // Loop for the specified number of lines
+        var line = "" // Initialize an empty line
+        for _ in 0..<length { // Loop for the specified line length
+            line += Bool.random() ? "0" : "1" // Randomly append "0" or "1" to the line
+        }
+        print("\(greenText)\(line)\(resetText)") // Print the line with green text color
+        usleep(100000) // Delay for visual effect
+    }
+}
+
+// Function to print a Matrix-styled header
+// Displays a Matrix-themed ASCII art header
+func printMatrixHeader() {
+    let matrixArt = """
+                      THE 
+ █████  ██       ██ ████     ███████  ██████ ██ █████  
+██   ██ ██ ██    ██ ██  ██   ██   ██  ██  ██ ██ ██  ██ 
+███████ ██   ██  ██ ██   ██  ████████ ██  ██ ██ ██   ██ 
+██   ██ ██     ████ ██    ██ ██    ██ ██  ██ ██ ██    ██ 
+██   ██ ██       ██ ██   ██  ██    ██ ██  ██ ██ ██   ██ 
+██   ██ ██       ██ ██████   ██    ██ ██████ ██ █████ 
+
+                     MATRIX
+    ...
+"""
+    
+    // Print the art in green color
+    print("\(greenText)\(matrixArt)\(resetText)")
+}
+
+// Main game function with aesthetic enhancements
+// This function contains the main gameplay loop and puzzle prompts
+func matrixEscapeRoom() {
+    printMatrixHeader() // Display the Matrix header
+    printMatrixStyle("The Android Matrix.\n") // Print introductory text
+    printMatrixCodeLines(lines: 3, length: 40) // Print lines of random binary code for visual effect
+
+    // Introductory story text for the game
+    printMatrixStyle("""
+    "You have been trapped by us, the Androidians, and we have confined you in our Galaxy Room. ...
+    """)
+
+    // Puzzle 1: Basic Swift keyword question
+    printMatrixStyle("\nPuzzle 1. What keyword is used to define a constant in Swift?")
+    let answer1 = prompt("Enter the answer here: ")
+    if answer1.lowercased() == "let" { // Check if the answer is correct
+        printMatrixStyle("Correct! Access granted to the next level.")
+    } else {
+        printMatrixStyle("Access denied. The sentinels are closing in...")
+        return // End game if incorrect
+    }
+
+    // Puzzle 2: Data type question
+    printMatrixStyle("\nPuzzle 2: What data type represents an ordered collection in Swift?")
+    let answer2 = prompt("Enter your answer here")
+    if answer2.lowercased() == "array" { // Check if the answer is correct
+        printMatrixStyle("Correct! You found the correct path.")
+    } else {
+        printMatrixStyle("Incorrect. The sentinels detected you...")
+        return // End game if incorrect
+    }
+
+    // Puzzle 3: Optionals in Swift
+    printMatrixStyle("\nPuzzle 3: What keyword is used for defining an optional that must have a value?")
+    let answer3 = prompt("Enter the answer")
+    if answer3.lowercased() == "unwrapped" { // Check if the answer is correct
+        printMatrixStyle("That is correct. The final door appears.")
+    } else {
+        printMatrixStyle("Wrong answer. The code collapses around you...")
+        return // End game if incorrect
+    }
+
+    // Final Puzzle: Swift protocol question
+    printMatrixStyle("\nFinal Puzzle: Answer the question.")
+    printMatrixStyle("What Swift protocol is used to create a type that can be iterated over in a loop?")
+    let answer4 = prompt("Enter your answer: ")
+    if answer4.lowercased().contains("sequence") { // Check if the answer contains the correct term
+        printMatrixStyle("""
+        Congratulations! You have solved all the puzzles and escaped the construct.
+        The Matrix shatters, and you are free.
+
+        █▓▒░ SYSTEM EXIT SUCCESSFUL ░▒▓█
+        """)
+    } else {
+        printMatrixStyle("Your perception was not enough. The simulation restarts...")
+    }
+}
+
+// Run the game function to start the experience
+matrixEscapeRoom()
+
+
