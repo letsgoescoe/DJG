@@ -1,11 +1,3 @@
-swift
-//
-//  main.swift
-//  DjgTheMatrix
-//
-//  Created by Dominique Escoe on 11/12/24.
-//
-
 import Foundation // Importing Foundation framework for basic functionalities
 
 // ANSI color codes for green text
