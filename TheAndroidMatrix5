@@ -151,47 +151,45 @@ func matrixEscapeRoom() {
     We give you one chance, one opportunity to prove that you are worthy to leave this place. Fail, and you will remain here, in the void of our galaxy, lost to time and space. But answer wisely, and the doors will open, and you’ll be free to return to your world."
 
     """)
-
-    // Swift Question 1
-    printMatrixStyle("\nPuzzle 1. What keyword is used to define a constant in Swift?")
-    let answer1 = prompt("Enter the answer here: ")
-    if answer1.lowercased() == "let" {
-        printMatrixStyle("Correct! Access granted to the next level.")
-    } else {
-        printMatrixStyle("Access denied. The sentinels are closing in...")
-        return
-    }
-
-    //  Swift Question 2
-    printMatrixStyle("\nPuzzle 2: What data type represents an ordered collection in Swift?")
-    let answer2 = prompt("Enter your answer here")
-    if answer2.lowercased() == "array" {
-        printMatrixStyle("Correct! You found the correct path.")
-    } else {
-        printMatrixStyle("Incorrect. The sentinels detected you...")
-        return
-    }
-
-    // Swift Question 3
-    printMatrixStyle("\nPuzzle 3: What keyword is used for defining an optional that must have a value?")
-    let answer3 = prompt("Enter the answer")
-    if answer3.lowercased() == "unwrapped" {
-        printMatrixStyle("That is correct. The final door appears.")
-    } else {
-        printMatrixStyle("Wrong answer. The code collapses around you...")
-        return
-    }
-
-    // Final Swift Question 4
-    printMatrixStyle("\nFinal Puzzle: Answer the question.")
-    printMatrixStyle("What Swift protocol is used to create a type that can be iterated over in a loop?")
-    let answer4 = prompt("Enter your answer: ")
-    if answer4.lowercased().contains("sequence") || answer4.lowercased().contains("sequence") {
-        printMatrixStyle("""
+ while true {
+           //  Swift Question 1
+           printMatrixStyle("\nPuzzle 1. What keyword is used to define a constant in Swift?")
+           let answer1 = prompt("Enter the answer here: ")
+           if answer1.lowercased() != "let" {
+               printMatrixStyle("Access denied. The sentinels are closing in...")
+               continue  // Loop back to question 1
+           } else {
+               printMatrixStyle("Correct! Access granted to the next level.")
+           }
+           
+           // Swift Question 2
+           printMatrixStyle("\nPuzzle 2: What data type represents an ordered collection in Swift?")
+           let answer2 = prompt("Enter your answer here")
+           if answer2.lowercased() != "array" {
+               printMatrixStyle("Incorrect. The sentinels detected you...")
+               continue  // Loop back to question 1
+           } else {
+               printMatrixStyle("Correct! You found the correct path.")
+           }
+           
+           // Swift Question 3
+           printMatrixStyle("\nPuzzle 3: What keyword is used for defining an optional that must have a value?")
+           let answer3 = prompt("Enter the answer")
+           if answer3.lowercased() != "unwrapped" {
+               printMatrixStyle("Wrong answer. The code collapses around you...")
+               continue  // Loop back to question 1
+           } else {
+               printMatrixStyle("That is correct. The final door appears.")
+           }
+           
+           // Final Swift Question 4
+           printMatrixStyle("\nFinal Puzzle: Answer the question.")
+           printMatrixStyle("What Swift protocol is used to create a type that can be iterated over in a loop?")
+           let answer4 = prompt("Enter your answer: ")
+           if answer4.lowercased().contains("sequence") || answer4.lowercased().contains("sequence") {
+               printMatrixStyle("""
         Congratulations! You have solved all the puzzles and escaped the construct.
         The Matrix shatters, and you are free.
-
-        
         █▓▒░ SYSTEM EXIT SUCCESSFUL ░▒▓█
         
                                                                         
